@@ -34,20 +34,22 @@ namespace SKUPromotions.BusinessLogic
             //Check if List is empty or not
             if (inputLst != null && inputLst.Count > 0)
             {
-                Dictionary<string, double> pricelst = new Dictionary<string, double>();
+                List<SKUProductsDetail> pricelst = new List<SKUProductsDetail>();
                 double price = 0.0;
                 for (int i = 0; i < inputLst.Count; i++)
                 {
-                    var input = inputLst[0];
+                    SKUProductsDetail obj = new SKUProductsDetail();
+                    var input = inputLst[i];
                     double prdctVal = prdctPriceLst.Where(x => x.SKUProductNm == input.ProductName).Select(x => x.ProductPrice).FirstOrDefault();
                     var singlepromo = promoDetailsLst.Where(x => x.PromoProductNm == input.ProductName).FirstOrDefault();
                     if (singlepromo.PromoType == "Number")
                     {
                         if (input.NumberOfProducts > singlepromo.ProductPromoNumber)
                         {
-                            price = singlepromo.PromoValue + (input.NumberOfProducts * prdctVal);
+                            obj.ProductPrice = singlepromo.PromoValue + ((input.NumberOfProducts - singlepromo.ProductPromoNumber) * prdctVal);
                         }
-                        pricelst.Add(input.ProductName, price);
+                        obj.SKUProductNm = input.ProductName;
+                        pricelst.Add(obj);
                     }
 
                     else if (singlepromo.PromoType == "Perc")
@@ -55,13 +57,15 @@ namespace SKUPromotions.BusinessLogic
                         //applying percentage on one product and adin remaining products with actual value.
                         if (input.NumberOfProducts == 1)
                         {
-                            price = (prdctVal - (singlepromo.PromoValue * prdctVal) / 100);
-                            pricelst.Add(input.ProductName, price);
+                            obj.ProductPrice = (prdctVal - (singlepromo.PromoValue * prdctVal) / 100);
+                            obj.SKUProductNm = input.ProductName;
+                            pricelst.Add(obj);
                         }
                         else if (input.NumberOfProducts > 1)
                         {
-                            price = (prdctVal - (singlepromo.PromoValue * prdctVal) / 100) + prdctVal * (input.NumberOfProducts - 1);
-                            pricelst.Add(input.ProductName, price);
+                            obj.ProductPrice = (prdctVal - (singlepromo.PromoValue * prdctVal) / 100) + prdctVal * (input.NumberOfProducts - 1);
+                            obj.SKUProductNm = input.ProductName;
+                            pricelst.Add(obj);
                         }
                     }
                     else if (singlepromo.PromoType == "Combination")
@@ -69,15 +73,13 @@ namespace SKUPromotions.BusinessLogic
 
 
                     }
-
-
-                    foreach (var item in pricelst)
-                    {
-                        Console.WriteLine("Price of product " + item.Key + " = " + item.Value);
-                    }
-                    Console.WriteLine("Total price is : " + pricelst.Sum(x => x.Value));
-
                 }
+                foreach (var item in pricelst)
+                {
+                    Console.WriteLine("Price of product " + item.SKUProductNm + " = " + item.ProductPrice);
+                }
+                Console.WriteLine("Total price is : " + pricelst.Sum(x => x.ProductPrice));
+                Console.ReadLine();
             }
 
 
