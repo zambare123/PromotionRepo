@@ -48,8 +48,16 @@ namespace SKUPromotions.BusinessLogic
                     else if (singlepromo.PromoType == "Perc")
                     {
                         //applying percentage on one product and adin remaining products with actual value.
-                        price = (prdctVal - (singlepromo.PromoValue * prdctVal) / 100) + prdctVal * (input.NumberOfProducts - 1);
-                        pricelst.Add(price);
+                        if (input.NumberOfProducts == 1)
+                        {
+                            price = (prdctVal - (singlepromo.PromoValue * prdctVal) / 100);
+                            pricelst.Add(price);
+                        }
+                        else if (input.NumberOfProducts > 1)
+                        {
+                            price = (prdctVal - (singlepromo.PromoValue * prdctVal) / 100) + prdctVal * (input.NumberOfProducts - 1);
+                            pricelst.Add(price);
+                        }
                     }
                 }
             }
