@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SKUPromotions.Entities
 {
-    class SKUProductsDetail: BaseEntity
+    public class SKUProductsDetail: BaseEntity
     {
         [Key]
         public int SKUProductId { get; set; }

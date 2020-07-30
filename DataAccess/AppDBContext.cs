@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace SKUPromotions.DataAccess
 {
-    class AppDBContext : DbContext
+    public class AppDBContext : DbContext
     {
-        public AppDBContext() : base("DBConnectionString")
+        public AppDBContext() : base("name=DBConnectionString")
         {
 
         }
