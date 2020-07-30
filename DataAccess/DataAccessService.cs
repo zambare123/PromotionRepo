@@ -14,6 +14,11 @@ namespace SKUPromotions.DataAccess
         {
             _context = context;
         }
+        public DataAccessService()
+        {
+            _context = new AppDBContext();
+        }
+
 
         public List<SKUProductsDetail> GetProductPrice()
         {
