@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,7 +12,11 @@ namespace SKUPromotions.BusinessLogic
 {
     public class ProcessPromotion
     {
-        private readonly IDataAccessService _dataAccessService; 
+        private readonly IDataAccessService _dataAccessService;
+        public ProcessPromotion()
+        {
+            _dataAccessService = new DataAccessService();
+        }
         public ProcessPromotion(IDataAccessService dataAccessService)
         {
             _dataAccessService = dataAccessService;
@@ -29,7 +34,7 @@ namespace SKUPromotions.BusinessLogic
             //Check if List is empty or not
             if (inputLst != null && inputLst.Count > 0)
             {
-                List<double> pricelst = new List<double>();
+                Dictionary<string, double> pricelst = new Dictionary<string, double>();
                 double price = 0.0;
                 for (int i = 0; i < inputLst.Count; i++)
                 {
@@ -42,7 +47,7 @@ namespace SKUPromotions.BusinessLogic
                         {
                             price = singlepromo.PromoValue + (input.NumberOfProducts * prdctVal);
                         }
-                        pricelst.Add(price);
+                        pricelst.Add(input.ProductName, price);
                     }
 
                     else if (singlepromo.PromoType == "Perc")
@@ -51,14 +56,27 @@ namespace SKUPromotions.BusinessLogic
                         if (input.NumberOfProducts == 1)
                         {
                             price = (prdctVal - (singlepromo.PromoValue * prdctVal) / 100);
-                            pricelst.Add(price);
+                            pricelst.Add(input.ProductName, price);
                         }
                         else if (input.NumberOfProducts > 1)
                         {
                             price = (prdctVal - (singlepromo.PromoValue * prdctVal) / 100) + prdctVal * (input.NumberOfProducts - 1);
-                            pricelst.Add(price);
+                            pricelst.Add(input.ProductName, price);
                         }
                     }
+                    else if (singlepromo.PromoType == "Combination")
+                    {
+
+
+                    }
+
+
+                    foreach (var item in pricelst)
+                    {
+                        Console.WriteLine("Price of product " + item.Key + " = " + item.Value);
+                    }
+                    Console.WriteLine("Total price is : " + pricelst.Sum(x => x.Value));
+
                 }
             }
 
