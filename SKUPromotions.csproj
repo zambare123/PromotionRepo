@@ -54,8 +54,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogic\ProcessPromotion.cs" />
     <Compile Include="DataAccess\AppDBContext.cs" />
+    <Compile Include="DataAccess\DataAccessService.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\ProductsInputEntity.cs" />
     <Compile Include="Entities\PromotionEntity.cs" />
     <Compile Include="Entities\SKUProductsDetail.cs" />
     <Compile Include="Migrations\202007301326478_SKUProotions.cs" />
