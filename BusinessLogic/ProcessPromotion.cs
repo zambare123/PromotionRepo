@@ -2,6 +2,7 @@
 using SKUPromotions.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,14 +35,22 @@ namespace SKUPromotions.BusinessLogic
                 {
                     var input = inputLst[0];
                     double prdctVal = prdctPriceLst.Where(x => x.SKUProductNm == input.ProductName).Select(x => x.ProductPrice).FirstOrDefault();
-                    var data = promoDetailsLst.Where(x => x.PromoProductNm == input.ProductName).FirstOrDefault();
-                    if(input.NumberOfProducts > data.ProductPromoNumber)
+                    var singlepromo = promoDetailsLst.Where(x => x.PromoProductNm == input.ProductName).FirstOrDefault();
+                    if (singlepromo.PromoType == "Number")
                     {
-                        price = data.PromoValue + (input.NumberOfProducts * prdctVal);
+                        if (input.NumberOfProducts > singlepromo.ProductPromoNumber)
+                        {
+                            price = singlepromo.PromoValue + (input.NumberOfProducts * prdctVal);
+                        }
+                        pricelst.Add(price);
                     }
-                    pricelst.Add(price);
 
-
+                    else if (singlepromo.PromoType == "Perc")
+                    {
+                        //applying percentage on one product and adin remaining products with actual value.
+                        price = (prdctVal - (singlepromo.PromoValue * prdctVal) / 100) + prdctVal * (input.NumberOfProducts - 1);
+                        pricelst.Add(price);
+                    }
                 }
             }
 
