@@ -12,7 +12,9 @@ namespace SKUPromotions.Entities
         [Key]
         public int SKUProductId { get; set; }
 
-        public int SKUProductNm { get; set; }
+        public string SKUProductNm { get; set; }
+
+        public double ProductPrice { get; set; }
     }
 
 
