@@ -1,0 +1,15 @@
+C:\Users\Mohan\Desktop\Git\Promotions\SKUPromotions\bin\Debug\SKUPromotions.exe.config
+C:\Users\Mohan\Desktop\Git\Promotions\SKUPromotions\bin\Debug\SKUPromotions.exe
+C:\Users\Mohan\Desktop\Git\Promotions\SKUPromotions\bin\Debug\SKUPromotions.pdb
+C:\Users\Mohan\Desktop\Git\Promotions\SKUPromotions\bin\Debug\EntityFramework.dll
+C:\Users\Mohan\Desktop\Git\Promotions\SKUPromotions\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Mohan\Desktop\Git\Promotions\SKUPromotions\bin\Debug\EntityFramework.xml
+C:\Users\Mohan\Desktop\Git\Promotions\SKUPromotions\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Mohan\Desktop\Git\Promotions\SKUPromotions\obj\Debug\SKUPromotions.csprojAssemblyReference.cache
+C:\Users\Mohan\Desktop\Git\Promotions\SKUPromotions\obj\Debug\SKUPromotions.csproj.CoreCompileInputs.cache
+C:\Users\Mohan\Desktop\Git\Promotions\SKUPromotions\obj\Debug\SKUPromotions.csproj.CopyComplete
+C:\Users\Mohan\Desktop\Git\Promotions\SKUPromotions\obj\Debug\SKUPromotions.exe
+C:\Users\Mohan\Desktop\Git\Promotions\SKUPromotions\obj\Debug\SKUPromotions.pdb
+C:\Users\Mohan\Desktop\Git\Promotions\SKUPromotions\obj\Debug\SKUPromotions.Migrations.SKUProotions.resources
+C:\Users\Mohan\Desktop\Git\Promotions\SKUPromotions\obj\Debug\SKUPromotions.csproj.GenerateResource.cache
+C:\Users\Mohan\Desktop\Git\Promotions\SKUPromotions\obj\Debug\SKUPromotions.Migrations.SKU2.resources
