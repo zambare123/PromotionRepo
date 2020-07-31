@@ -29,3 +29,4 @@ C:\Users\Mohan\Desktop\Promotions\PromotionRepo\obj\Debug\SKUPromotions.csproj.C
 C:\Users\Mohan\Desktop\Promotions\PromotionRepo\obj\Debug\SKUPromotions.exe
 C:\Users\Mohan\Desktop\Promotions\PromotionRepo\obj\Debug\SKUPromotions.pdb
 C:\Users\Mohan\Desktop\Promotions\PromotionRepo\obj\Debug\SKUPromotions.Migrations.SKU21.resources
+C:\Users\Mohan\Desktop\Promotions\PromotionRepo\obj\Debug\SKUPromotions.Migrations.SKU22.resources
