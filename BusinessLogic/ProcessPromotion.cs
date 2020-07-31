@@ -82,24 +82,20 @@ namespace SKUPromotions.BusinessLogic
                       
                     }
                 }
-                foreach (var promodetails in promoDetailsLst)
-                {
-                    combinationpromoLst = promoDetailsLst.Where(x => x.ProductPromoNumber ==
-                    promodetails.ProductPromoNumber && x.PromoType == "Combination").ToList();
-                }
+                combinationpromoLst = promoDetailsLst.Where(x => x.PromoType == "Combination").ToList();
+                
 
                 foreach (var combiPrmot in combinationpromoLst)
                 {
-                    inputLstcombinationprdtLst = inputLst.Where(x => x.ProductName == combiPrmot.PromoProductNm).ToList();
-                    inputLstcombiprdtLstforRemainingItem = inputLstcombinationprdtLst;
+                    inputLstcombinationprdtLst.Add(inputLst.Where(x => x.ProductName == combiPrmot.PromoProductNm).FirstOrDefault());
                 }
-
-                if(inputLstcombinationprdtLst.Count() == combinationpromoLst[0].ProductPromoNumber)
+                inputLstcombiprdtLstforRemainingItem = inputLstcombinationprdtLst;
+                if (inputLstcombinationprdtLst.Count() == combinationpromoLst[0].ProductPromoNumber)
                 {
                     int count = 0;
                     string prductNm = string.Empty;
                     SKUProductsDetail combiSkuobj = new SKUProductsDetail();
-                    while (inputLstcombinationprdtLst.Where( x=> x.NumberOfProducts > 0).Count() == 0)
+                    while (inputLstcombinationprdtLst.Where( x=> x.NumberOfProducts > 0).Count() != 0)
                     {
                         for (int i = 0; i < combinationpromoLst[0].ProductPromoNumber; i++)
                         {
