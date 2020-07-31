@@ -87,7 +87,9 @@ namespace SKUPromotions.BusinessLogic
 
                 foreach (var combiPrmot in combinationpromoLst)
                 {
-                    inputLstcombinationprdtLst.Add(inputLst.Where(x => x.ProductName == combiPrmot.PromoProductNm).FirstOrDefault());
+                    var datainputObj = inputLst.Where(x => x.ProductName == combiPrmot.PromoProductNm).FirstOrDefault();
+                    if(datainputObj != null)
+                    inputLstcombinationprdtLst.Add(datainputObj);
                 }
                 inputLstcombiprdtLstforRemainingItem = inputLstcombinationprdtLst;
                 if (inputLstcombinationprdtLst.Count() == combinationpromoLst[0].ProductPromoNumber)

@@ -100,6 +100,11 @@
       <DependentUpon>202007310545019_SKU22.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="DBScripts\Database_Table_GenrationScripts.sql" />
+    <Content Include="DBScripts\PromotionEntities_Insert.sql" />
+    <Content Include="DBScripts\SKUProductsDetails_Insert.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
