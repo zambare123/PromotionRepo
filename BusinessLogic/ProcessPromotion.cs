@@ -37,7 +37,8 @@ namespace SKUPromotions.BusinessLogic
                 List<SKUProductsDetail> pricelst = new List<SKUProductsDetail>();
                 List<PromotionEntity> combinationpromoLst = new List<PromotionEntity>();
                 List<ProductsInputEntity> inputLstcombinationprdtLst = new List<ProductsInputEntity>();
-                //double price = 0.0;
+                List<ProductsInputEntity> inputLstcombiprdtLstforRemainingItem = new List<ProductsInputEntity>();
+
                 for (int i = 0; i < inputLst.Count; i++)
                 {
                     SKUProductsDetail obj = new SKUProductsDetail();
@@ -89,17 +90,61 @@ namespace SKUPromotions.BusinessLogic
 
                 foreach (var combiPrmot in combinationpromoLst)
                 {
-
-                    var inputLstcombinationprdtLst = inputLst.Where(x => x.ProductName ==
-                                                     combiPrmot.PromoProductNm).ToList();
-
-
-
+                    inputLstcombinationprdtLst = inputLst.Where(x => x.ProductName == combiPrmot.PromoProductNm).ToList();
+                    inputLstcombiprdtLstforRemainingItem = inputLstcombinationprdtLst;
                 }
 
-                if (combinationpromoLst.Count() > )
+                if(inputLstcombinationprdtLst.Count() == combinationpromoLst[0].ProductPromoNumber)
+                {
+                    int count = 0;
+                    string prductNm = string.Empty;
+                    SKUProductsDetail combiSkuobj = new SKUProductsDetail();
+                    while (inputLstcombinationprdtLst.Where( x=> x.NumberOfProducts > 0).Count() == 0)
+                    {
+                        for (int i = 0; i < combinationpromoLst[0].ProductPromoNumber; i++)
+                        {
+                            if (inputLstcombinationprdtLst[i].NumberOfProducts > 0)
+                            {
+                                count++;
+                            }
+                            inputLstcombinationprdtLst[i].NumberOfProducts--;
+                            prductNm = prductNm + " " + inputLstcombinationprdtLst[i].ProductName;
+                        }
+                    }
+                    
+                    combiSkuobj.ProductPrice = (combinationpromoLst[0].PromoValue * count / 2);
+                    combiSkuobj.SKUProductNm = prductNm;
+                   
+                    foreach (var remainingCombival in inputLstcombinationprdtLst)
+                    {
+                        if (remainingCombival.NumberOfProducts > 0)
+                        {
+                            double prdctVal = prdctPriceLst.Where(x => x.SKUProductNm == remainingCombival.ProductName).Select(x => x.ProductPrice).FirstOrDefault();
 
-                    foreach (var item in pricelst)
+                            combiSkuobj.ProductPrice += remainingCombival.NumberOfProducts * prdctVal;
+                            combiSkuobj.SKUProductNm = remainingCombival.ProductName;
+                        }
+                    }
+                    pricelst.Add(combiSkuobj);
+                }
+
+                else
+                {
+                     SKUProductsDetail combiSkuobj = new SKUProductsDetail();
+                    foreach (var remainingCombival in inputLstcombiprdtLstforRemainingItem)
+                    {
+
+                        double prdctVal = prdctPriceLst.Where(x => x.SKUProductNm == remainingCombival.ProductName).Select(x => x.ProductPrice).FirstOrDefault();
+                        combiSkuobj.ProductPrice += remainingCombival.NumberOfProducts * prdctVal;
+                        combiSkuobj.SKUProductNm = remainingCombival.ProductName;
+                        pricelst.Add(combiSkuobj);
+                    }
+                    
+                }
+
+
+
+                foreach (var item in pricelst)
                 {
                     Console.WriteLine("Price of product " + item.SKUProductNm + " = " + item.ProductPrice);
                 }
