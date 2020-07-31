@@ -13,7 +13,7 @@ namespace SKUPromotions.Entities
         public int PromoId { get; set; }
         public string PromoNm { get; set; }
         public string PromoProductNm { get; set; }
-        public double ProductPromoNumber { get; set; }
+        public int ProductPromoNumber { get; set; }
         public double PromoValue { get; set; }
         public string PromoType { get; set; }
     }
